@@ -48,43 +48,48 @@ function checkGuess(w, g, isWord) {
 
 //iterates an array of strings of length 5 and
 //ranks the appearance of each character at each position
+//and sums its total rank
 //excluding characters in the passed in excludedArray
 function rankChars(words, excludedArray = []) {
 
   excludedSet = new Set(excludedArray)
 
   const charRankings = {
-    'a' : [0,0,0,0,0],
-    'b' : [0,0,0,0,0],
-    'c' : [0,0,0,0,0],
-    'd' : [0,0,0,0,0],
-    'e' : [0,0,0,0,0],
-    'f' : [0,0,0,0,0],
-    'g' : [0,0,0,0,0],
-    'h' : [0,0,0,0,0],
-    'i' : [0,0,0,0,0],
-    'j' : [0,0,0,0,0],
-    'k' : [0,0,0,0,0],
-    'l' : [0,0,0,0,0],
-    'm' : [0,0,0,0,0],
-    'n' : [0,0,0,0,0],
-    'o' : [0,0,0,0,0],
-    'p' : [0,0,0,0,0],
-    'q' : [0,0,0,0,0],
-    'r' : [0,0,0,0,0],
-    's' : [0,0,0,0,0],
-    't' : [0,0,0,0,0],
-    'u' : [0,0,0,0,0],
-    'v' : [0,0,0,0,0],
-    'w' : [0,0,0,0,0],
-    'x' : [0,0,0,0,0],
-    'y' : [0,0,0,0,0],
-    'z' : [0,0,0,0,0]
+    'a' : [0,0,0,0,0,0],
+    'b' : [0,0,0,0,0,0],
+    'c' : [0,0,0,0,0,0],
+    'd' : [0,0,0,0,0,0],
+    'e' : [0,0,0,0,0,0],
+    'f' : [0,0,0,0,0,0],
+    'g' : [0,0,0,0,0,0],
+    'h' : [0,0,0,0,0,0],
+    'i' : [0,0,0,0,0,0],
+    'j' : [0,0,0,0,0,0],
+    'k' : [0,0,0,0,0,0],
+    'l' : [0,0,0,0,0,0],
+    'm' : [0,0,0,0,0,0],
+    'n' : [0,0,0,0,0,0],
+    'o' : [0,0,0,0,0,0],
+    'p' : [0,0,0,0,0,0],
+    'q' : [0,0,0,0,0,0],
+    'r' : [0,0,0,0,0,0],
+    's' : [0,0,0,0,0,0],
+    't' : [0,0,0,0,0,0],
+    'u' : [0,0,0,0,0,0],
+    'v' : [0,0,0,0,0,0],
+    'w' : [0,0,0,0,0,0],
+    'x' : [0,0,0,0,0,0],
+    'y' : [0,0,0,0,0,0],
+    'z' : [0,0,0,0,0,0]
   }
   for (const word of words) {
     for (let i = 0; i < word.length; i++) {
       const char = word[i]
-      charRankings[char][i] += 1
+      console.log(excludedSet)
+      if (!excludedSet.has(char)) {
+        charRankings[char][i] += 1
+        charRankings[char][5] += 1
+      }
     }
   }
   return charRankings  
@@ -92,7 +97,7 @@ function rankChars(words, excludedArray = []) {
 
 //assign a score to each word in word list based on charRankings
 //return the top ranked words
-function findTopWords(charRankings, words) {
+function findTopWords(charRankings, words, total = true) {
   let topWord = ''
   let topRank = 0
   for (const word of words) {
